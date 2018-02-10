@@ -1,0 +1,16 @@
+---
+- name: install
+  hosts: all 
+  remote_user: ansible
+  vars:
+    backup: true
+ 
+  tasks:
+  - name: copy crontab 
+    copy:
+      src: /etc/crontab
+      dest: /tmp/crontab 
+      remote_src: true
+    when: backup 
+
+

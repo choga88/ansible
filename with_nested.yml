@@ -1,0 +1,28 @@
+---
+- name: install
+  hosts: web 
+  remote_user: ansible
+  vars:
+    users:
+    - alice
+    - bob
+    folders:
+    - mail
+    - public_html 
+  
+  tasks:
+  - name: ensuere the users exist 
+    user: 
+      name: '{{item}}'
+    become: true
+    with_items:
+    - '{{users}}'
+   
+  - name: ensure folder exist 
+    file: 
+      path: '/home/{{item.0}}/{{item.1}}'
+      state: directory
+    become: true
+    with_nested:
+    - '{{users}}'
+    - '{{folders}}'

@@ -1,0 +1,26 @@
+---
+- name: install
+  hosts: all 
+  remote_user: root
+  
+  tasks:
+  - name: epel   
+    yum: 
+      name: epel-release
+      state: present 
+    become: true 
+  - name: python   
+    yum: 
+      name: libselinux-python
+      state: present 
+    become: true 
+  - name: python2   
+    yum: 
+      name: libsemanage-python
+      state: present 
+    become: true 
+  - name: every package   
+    yum: 
+      name: "*"
+      state: latest 
+    become: true 

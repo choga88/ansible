@@ -1,0 +1,10 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - debug:
+      msg: "{{ answers | replace ('no', 'yes') | lower }}"
+
+

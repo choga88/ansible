@@ -1,0 +1,23 @@
+---
+- name: install
+  hosts: all 
+  remote_user: root
+  
+  tasks:
+  - name: ntp install   
+    yum: 
+      name: ntp
+      state: present 
+    become: true 
+  - name: ntp link  
+    file:
+      src: /usr/share/zoneinfo/GMT
+      dest: /etc/localtime
+      state: link
+    become: true
+  - name: ntp enable   
+    service: 
+      name: ntpd
+      state: started
+      enabled: true
+    become: true 

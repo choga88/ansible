@@ -1,0 +1,25 @@
+---
+
+- name: localhost  
+  hosts: localhost 
+  gather_facts: true
+  remote_user: root
+  strategy: debug
+  vars: 
+  - derp:
+      keys:
+      - c
+      - d
+
+  tasks:
+  - name: subscript style 
+    debug: 
+      var: derp['keys']
+
+  - name: dot notation style
+    debug:
+      msg: "this is {{derp['missing']}}"
+ 
+  - name: final task
+    debug:
+      msg: "final final"

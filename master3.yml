@@ -1,0 +1,13 @@
+---
+- name: install
+  hosts: was 
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - shell: /usr/bin/uptime
+    register: result
+
+  - debug:
+      var: result
+      verbosity: 2
+

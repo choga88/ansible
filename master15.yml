@@ -1,0 +1,30 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+    - block:  
+        - name: delete branch bad 
+          command: git branch -D badfeature
+          args:
+            chdir: /srv/app
+        - name: this task is lost 
+          debug: 
+            msg: "i do nto get seen"
+      rescue:
+        - name: cleanup task
+          debug: 
+            msg: "i am cleaning up"
+        - name: cleanup task 2
+          debug:
+            msg: "i am also cleaning up"
+      always:
+        - name: most import task
+          debug: 
+            msg: "Never goint to let you down" 
+    - name: taks after block  
+      debug: 
+        msg: "execution goes on" 
+
+

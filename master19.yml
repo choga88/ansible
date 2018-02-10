@@ -1,0 +1,13 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - include: files.yml 
+    vars: 
+      files: 
+        herp:
+          path: /tmp/foo 
+        derp:
+          path: /tmp/foo 

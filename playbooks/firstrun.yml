@@ -1,0 +1,23 @@
+---
+- name: install
+  hosts: all 
+  remote_user: root
+  
+  tasks:
+  - name: ensure ansible user exists   
+    user: 
+      name: ansible
+      state: present 
+      comment: Ansible 
+  - name: ensure ansible user accept ssh key   
+    authorized_key: 
+      user: ansible
+      key: https://github.com/fale.keys
+    state: present
+  - name: ensure ansible user sudoer with no passwd required   
+    lineinfile: 
+      dest: /etc/sudoers
+      state: present 
+      regexp: '^ansible ALL\='
+      line: 'ansible ALL=(ALL) NOPASSWD:ALL'
+      validate: 'visudo -cf %s'

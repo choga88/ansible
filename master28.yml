@@ -1,0 +1,11 @@
+---
+
+- name: vars file  
+  hosts: localhost
+  gather_facts: false
+  remote_user: root
+  tasks:
+  - name: a task 
+    debug:
+      msg: "i am a {{name}}" 
+  

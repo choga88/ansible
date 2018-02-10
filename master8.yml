@@ -1,0 +1,20 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - name: fail a tssk 
+    debug:
+      msg: "i am not a change" 
+    register: derp
+
+  - name: only do this on change 
+    debug:
+      msg: "you had a change" 
+    when: derp | changed
+
+  - name: only do this on sucess 
+    debug:
+      msg: "you had a sucess"
+    when: derp | success

@@ -1,0 +1,24 @@
+---
+
+- name: localhost  
+  hosts: failtest[0:3]
+  gather_facts: false
+  remote_user: root
+  tasks:
+  - name: do a thing
+    debug:
+      msg: " i am groot"
+    changed_when: inventory_hostname in play_hosts[0:2]
+    register: groot
+    notify: restart groot
+ 
+  handlers:
+  - name: restart groot  
+    debug: 
+      mag: "i am groot?"
+    with_item: "{{play_hosts}}"
+    delegate_to: "{{item}}"
+    run_once: true
+    when: hostvars[item]['groot']['changed'] | bool
+    loop_control: 
+      pause: 2

@@ -1,0 +1,14 @@
+---
+- name: install
+  hosts: localhost 
+  remote_user: root
+  
+  tasks:
+  - name: list file in /tmp 
+    command: ls /tmp 
+    register: list_files
+  
+  - name: check file testfile.txt exists 
+    assert: 
+      that:
+      - "'testfile.txt' in list_files.stdout_lines"

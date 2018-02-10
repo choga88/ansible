@@ -1,0 +1,20 @@
+---
+- name: install
+  hosts: web 
+  remote_user: ansible
+  
+  tasks:
+  - name: ensuere /tmp/iproute2 
+    file: 
+      dest: '/tmp/iproute2'
+      state: directory
+    become: true
+   
+  - name: copy rt file tp tmp folder 
+    copy: 
+      src: '{{item}}'
+      dest: '/tmp/iproute2'
+      remote_src: true
+    become: true
+    with_fileglob:
+    - '/etc/iproute2/rt_*'

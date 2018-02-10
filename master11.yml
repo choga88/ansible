@@ -1,0 +1,12 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - name: broken website  
+    uri:
+      url: http://google.com
+    ignore_errors: true      
+
+

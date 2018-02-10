@@ -1,0 +1,13 @@
+---
+
+- name: vars file  
+  hosts: localhost
+  gather_facts: false
+  remote_user: root
+  vars_files: 
+  - variables.yml 
+  tasks:
+  - name: a task 
+    debug:
+      msg: "i am a {{name}}" 
+  

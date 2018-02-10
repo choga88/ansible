@@ -1,0 +1,8 @@
+---
+  - name: httpd package update
+    yum:
+      name: httpd
+      state: latest 
+
+
+

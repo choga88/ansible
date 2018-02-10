@@ -1,0 +1,14 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - name: query session  
+    command: /sbin/iscsiadm -m session
+    register: sessions
+    failed_when: 
+  - sessions.rc != 0 
+  - not sessions.stderr | search('No active sessions')
+    changed_when: false  
+

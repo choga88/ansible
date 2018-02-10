@@ -1,0 +1,10 @@
+---
+- name: install
+  hosts: all
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - debug:
+      var=inventory_hostname
+
+

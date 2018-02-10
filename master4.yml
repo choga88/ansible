@@ -1,0 +1,24 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: True
+  remote_user: root 
+  tasks:
+  - name: debug var 
+    debug:
+      var: hostvars[inventory_hostname]
+      verbosity: 2
+
+  - name: debug msg 
+    debug:
+      msg: "i am debug msg"
+
+  - name: shell register
+    shell: /usr/bin/uptime
+    register: result
+
+  - name: register display  
+    debug:
+      var: result.stdout
+      verbosity: 2
+

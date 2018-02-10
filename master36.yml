@@ -1,0 +1,20 @@
+---
+
+- name: localhost  
+  hosts: localhost 
+  gather_facts: true
+  remote_user: root
+  vars: 
+  - derp:
+      keys:
+      - c
+      - d
+
+  tasks:
+  - name: subscript style 
+    debug: 
+      var: derp['keys']
+  - name: dot notation style
+    debug:
+      var: derp.keys
+

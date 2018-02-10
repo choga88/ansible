@@ -1,0 +1,37 @@
+---
+
+- name: localhost  
+  hosts: localhost
+  gather_facts: false
+  remote_user: root
+  pre_tasks: 
+  - name: pretask
+    debug:
+      msg="pre task"
+    changed_when: true
+    notify: say hi
+
+  roles:
+  - role: simple 
+    derp: newval  
+  
+  tasks: 
+  - name: task
+    debug:
+      msg=" task"
+    changed_when: true
+    notify: say hi
+  
+  post_tasks: 
+  - name: posttask
+    debug:
+      msg="post task"
+    changed_when: true
+    notify: say hi
+
+  handlers:
+  - name: say hi
+    debug:
+      msg="hi"
+
+

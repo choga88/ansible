@@ -1,0 +1,16 @@
+---
+
+- name: touch file  
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - name: a task 
+    debug:
+      msg: "i am changing task" 
+    changed_when: true
+    notify: handler 
+  handlers:
+  - include: handlers.yml
+    when: foo | default('true') | bool 
+  

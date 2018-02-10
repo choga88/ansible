@@ -1,0 +1,11 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - name: string method 
+    debug:
+      msg: "{{'foo bar baz'.upper().split() }}" 
+
+

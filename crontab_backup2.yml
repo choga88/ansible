@@ -1,0 +1,20 @@
+---
+- name: install
+  hosts: all 
+  remote_user: ansible
+  vars:
+    backup: 
+ 
+  tasks:
+  - name: check backup_folder  
+    fail:
+      msg: 'backup_folder not set'
+    when: backup_foler is not defined
+  
+
+  - name: copy crontab   
+    copy:
+      src: /etc/crontab
+      dest: '{{backup_folder}}/crontab'
+    when: backup
+

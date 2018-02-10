@@ -1,0 +1,17 @@
+---
+
+- name: localhost  
+  hosts: failtest
+  gather_facts: false
+  remote_user: root
+  max_fail_percentage: 30 
+  tasks:
+  - name: fail last host
+    fail: 
+      msg: "i am last"
+    when: inventory_hostname == play_hosts[0:4]
+ 
+  - name: never run  
+    debug: 
+      msg: "never run "
+    when: inventory_hostname == play_hosts[-1]

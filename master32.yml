@@ -1,0 +1,17 @@
+---
+
+- name: localhost  
+  hosts: failtest
+  gather_facts: false
+  remote_user: root
+  tasks:
+  - name: do a thing
+    debug:
+      msg: " i am groot"
+    register: groot
+    run_once: true 
+ 
+  - name: what is groot  
+    debug: 
+      var: groot
+    when: inventory_hostname == play_hosts[-1]

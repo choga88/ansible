@@ -1,0 +1,31 @@
+---
+
+- name: localhost  
+  hosts: failtest
+  gather_facts: false
+  remote_user: root
+  max_fail_percentage: 0 
+  force_handlers: true
+  tasks:
+  - name: run first 
+    debug: 
+      msg: "i am change"
+    changed_when: true
+    when: inventory_hostname == play_hosts[-1]
+    notify: critical handler
+ 
+  - name: change a host  
+    fail: 
+      msg: "i am last "
+    when: inventory_hostname == play_hosts[-1]
+
+  - name: never run  
+    debug: 
+      msg: "never run "
+    when: inventory_hostname == play_hosts[-1]
+
+  handlers: 
+  - name: critical handler 
+    debug:
+      msg: "i really need to run" 
+

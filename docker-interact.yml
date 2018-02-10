@@ -1,0 +1,19 @@
+---
+
+- name: localhost  
+  hosts: localhost 
+  gather_facts: false
+  remote_user: root
+  tasks:
+  - name: build image 
+    docker_image:
+      path: .
+      state: present
+      name: nginx-moo 
+
+  - name: start container 
+    docker_container:
+      name: playbook-container 
+      image: nginx-moo
+      ports: 8080:80
+      state: started

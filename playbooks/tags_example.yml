@@ -1,0 +1,18 @@
+---
+- name: install
+  hosts: localhost 
+  remote_user: root
+  
+  tasks:
+  - name: ensure the file /tmp/ok exists 
+    file: 
+      name: /tmp/ok
+      state: touch 
+    tags:
+      - file_present  
+  - name: ensure file /tmp/ok does not exists 
+    file: 
+      name: /tmp/ok
+      state: absent 
+    tags:
+      - file_absent  

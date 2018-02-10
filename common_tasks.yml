@@ -1,0 +1,54 @@
+---
+- name: install
+  hosts: all 
+  remote_user: root
+  
+  tasks:
+  - name: epel   
+    yum: 
+      name: epel-release
+      state: present 
+    become: true 
+  - name: python   
+    yum: 
+      name: libselinux-python
+      state: present 
+    become: true 
+  - name: python2   
+    yum: 
+      name: libsemanage-python
+      state: present 
+    become: true 
+  - name: every package   
+    yum: 
+      name: "*"
+      state: latest 
+    become: true 
+  - name: ntp install
+    yum:
+      name: ntp
+      state: present
+    become: true
+  - name: ntp link
+    file:
+      src: /usr/share/zoneinfo/GMT
+      dest: /etc/localtime
+      state: link
+    become: true
+  - name: ntp enable
+    service:
+      name: ntpd
+      state: started
+      enabled: true
+    become: true
+  - name: motd file ensure
+    template:
+      src: motd.j2
+      dest: /etc/motd
+      owner: root
+      group: root
+      mode: 0644
+    become: true
+  - name: hostname
+    hostname:
+      name: "{{inventory_hostname}}"

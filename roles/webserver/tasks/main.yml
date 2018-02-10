@@ -1,0 +1,26 @@
+---
+- name: httpd install
+  yum: 
+    name: httpd
+    state: present 
+  become: true 
+- name: http start enable
+  service:
+    name: httpd
+    state: started
+    enabled: true
+  become: true
+- name: http config update 
+  copy:
+    src: website.conf
+    dest: /etc/httpd.conf.d
+  become: true
+  notify: Restart HTTPd
+- name: indexhtml update 
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
+  become: true

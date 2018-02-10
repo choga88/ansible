@@ -1,0 +1,11 @@
+---
+
+- name: install
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - include: more-tasks.yml 
+    with_items:
+      - one
+      - two

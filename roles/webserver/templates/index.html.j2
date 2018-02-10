@@ -1,0 +1,14 @@
+<html>
+	<body>
+		<h1>>Hello World!</h1>
+		<p> this page was created on {{ ansible_date_time.date}}.</p>
+		<ul>
+{% if ansible_ens33.active == True %}
+	<p> ens33 address {{ansible_ens33.ipv4.address}} </p>
+{% endif %}
+		
+
+
+</ul>
+	</body>
+</html>

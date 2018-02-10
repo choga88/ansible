@@ -1,0 +1,9 @@
+---
+
+- name: localhost  
+  hosts: localhost
+  gather_facts: false
+  remote_user: root
+  roles:
+  - role: simple 
+    derp: newval  

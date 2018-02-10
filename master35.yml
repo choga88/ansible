@@ -1,0 +1,11 @@
+---
+
+- name: localhost  
+  hosts: localhost 
+  gather_facts: true
+  remote_user: root
+  tasks:
+  - name: show a complex hash 
+    debug: 
+      var: ansible_default_ipv4.mtu
+

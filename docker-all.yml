@@ -1,0 +1,33 @@
+---
+
+- name: localhost  
+  hosts: localhost 
+  gather_facts: false
+  remote_user: root
+  tasks:
+  - name: start container 
+    docker_container:
+      name: playbook-container 
+      image: docker.io/ubuntu 
+      ports: 8080:80
+      state: started
+      command: sleep 500
+  - name: make host
+    add_host:
+      name: playbook-container
+      ansible_connection: docker 
+
+- name: do thing  
+  hosts: playbook-container
+  gather_facts: false
+  remote_user: root
+  tasks:
+  - name: install things
+    raw: apt-get update;apt-get install python;apt-get install -y nginx
+
+  - name: configure nginx 
+    lineinfile: 
+      line: "daemon off;"
+      dest: /etc/nginx/nginx.conf 
+  - name: run nginx
+    shell: nginx & 

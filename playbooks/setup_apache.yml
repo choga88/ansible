@@ -1,0 +1,22 @@
+---
+- name: install
+  hosts: all 
+  remote_user: root
+  
+  tasks:
+  - name: http install 
+    yum: 
+      name: httpd
+      state: present
+#      become: true 
+
+  - name: enable apache 
+    service: 
+      name: httpd
+      state: started
+      enabled: true
+#      become: true 
+  - name: apach configure 
+    template: 
+      src: 'userdir.conf'
+      dest: /etc/httpd/conf.d/userdir.conf'

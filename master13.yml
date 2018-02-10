@@ -1,0 +1,9 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - name: run frobitz  
+    script: files/frobitz creates=/srv/whiskey/tango
+

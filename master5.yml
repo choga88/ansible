@@ -1,0 +1,11 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: false
+  remote_user: root 
+  tasks:
+  - name: shuffle the cards 
+    debug:
+      msg: "{{['Ace', 'Queen', 'King', 'Deuce'] | shuffle}}" 
+
+
